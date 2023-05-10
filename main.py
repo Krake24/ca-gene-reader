@@ -45,7 +45,11 @@ def get_data(type, id):
         if "warPaint" in key:
             key_new=key.replace("warPaint", "warpaint")
             genes[key_new] = genes.pop(key)
-
+    purity=0
+    for attribute in pe[0]["contentMetadata"]["attributes"]:
+        if attribute["trait_type"] == "Purity":
+            purity=attribute["value"]
+    genes["purity"]=purity
     return genes
 
 if __name__ == "__main__":
