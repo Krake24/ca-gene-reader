@@ -27,6 +27,11 @@ def get_prime_data(id):
 def get_elemental_data(id):
     return get_data("ElementalChampion", id)
     
+def map_values(value):
+    if value == "NULL":
+        return "None"
+    return value
+
 def get_data(type, id):
     body = {}
     body["nftType"]=type
@@ -35,6 +40,12 @@ def get_data(type, id):
     response = requests.request("POST", url, headers=headers, data=str(json.dumps(body)))
     pe = json.loads(response.text)
     genes = pe[0]["championRecessiveGene"]
+    genes = dict((k, map_values(v)) for k,v in genes.items())
+    for key in list(genes.keys()):
+        if "warPaint" in key:
+            key_new=key.replace("warPaint", "warpaint")
+            genes[key_new] = genes.pop(key)
+
     return genes
 
 if __name__ == "__main__":
