@@ -49,7 +49,7 @@ def get_data(type, id):
     for attribute in pe[0]["contentMetadata"]["attributes"]:
         if attribute["trait_type"] == "Purity":
             purity=attribute["value"]
-    genes["purity"]=purity
+    genes["purity"]=int(purity)
     return genes
 
 if __name__ == "__main__":
