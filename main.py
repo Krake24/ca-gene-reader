@@ -31,7 +31,8 @@ def get_data(type, id):
     body = {}
     body["nftType"]=type
     body["withGene"]=True
-    body["tokenIds"]=[id]#
+    body["chain"]="Polygon"
+    body["tokenIds"]=[id]
     response = requests.request("POST", url, headers=headers, data=str(json.dumps(body)))
     pe = json.loads(response.text)
     genes = pe[0]["championRecessiveGene"]
